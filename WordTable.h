@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 struct word{
     std::string french;
@@ -24,7 +25,7 @@ class WordTable{
         int getIndex(std::string wordFrench);
         void addWord(std::string french, std::string english, std::string type);
         void addFromFile(std::string filename);
-        std::string englishFromFrench(std::string french);
+        void englishFromFrench(std::string french);
         void printTable();
 };
 
