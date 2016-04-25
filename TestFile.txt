@@ -1,0 +1,3 @@
+bon,good,adj
+école,school,n
+manger,to eat,v
