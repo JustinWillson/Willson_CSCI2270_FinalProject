@@ -14,6 +14,7 @@ struct word{
 class WordTable{
     private:
         word* WordTable[300];
+        word* blankWord;
     public:
         WordTable();
         ~WordTable();
