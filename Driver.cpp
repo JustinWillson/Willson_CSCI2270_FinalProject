@@ -22,11 +22,11 @@ int main(int argc, char* argv[]){
             
             myTable->englishFromFrench(word);
         } else if (userInput == "3") {
-            myTable->practiceNouns();
+            myTable->practiceVerbs();
         } else if (userInput == "4") {
             myTable->practiceNouns();
         } else if (userInput == "5") {
-            myTable->practiceNouns();
+            myTable->practiceAdjectives();
         } else if (userInput == "6"){
             cout << "Goodbye!" << endl;
         } else {

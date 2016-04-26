@@ -34,13 +34,14 @@ WordTable::~WordTable(){
 //the next three methods allow the user to practice different types of speech
 void WordTable::practiceNouns(){
     string input;
-    int score;
-    int count;
+    int score = 0;
+    int count = 0;
     for(int i = 0; i< 100; i++){
         if (wordTable[i]->french != ""){
             word* temp = wordTable[i];
             while(temp != NULL){
                 cout << "What is " << temp->french << " in English." << endl;
+                cin.ignore();
                 getline(cin, input);
                 if(input == temp->english){
                     score++;
@@ -56,13 +57,14 @@ void WordTable::practiceNouns(){
 
 void WordTable::practiceVerbs(){
     string input;
-    int score;
-    int count;
+    int score = 0;
+    int count = 0;
     for(int i = 100; i< 200; i++){
         if (wordTable[i]->french != ""){
             word* temp = wordTable[i];
             while(temp != NULL){
                 cout << "What is " << temp->french << " in English." << endl;
+                cin.ignore();
                 getline(cin, input);
                 if(input == temp->english){
                     score++;
@@ -79,13 +81,14 @@ void WordTable::practiceVerbs(){
 
 void WordTable::practiceAdjectives(){
     string input;
-    int score;
-    int count;
+    int score = 0;
+    int count = 0;
     for(int i = 200; i< 300; i++){
         if (wordTable[i]->french != ""){
             word* temp = wordTable[i];
             while(temp != NULL){
                 cout << "What is " << temp->french << " in English." << endl;
+                cin.ignore();
                 getline(cin, input);
                 if(input == temp->english){
                     score++;
@@ -132,14 +135,9 @@ void WordTable::addWord(string french, string english, string type){
     thisWord->type = type;
     
     int index = getIndex(french, type);
-    cout << "here is stuff at index ." << wordTable[index]->french << "." << wordTable[index]->english << "."  <<endl;
-    cout << "build word also here is index: " << index << endl;
     if(wordTable[index]->french == ""){
-        cout << "before insert" << endl;
         wordTable[index] = thisWord;
-        cout << "got through first if statement" << endl;
     } else {
-        cout << "entered other else?? " << endl;
         word* current = wordTable[index];
         while(current->next != NULL){
             current = current->next;
@@ -156,9 +154,7 @@ void WordTable::addFromFile(string filename){
     ifstream file;
     file.open (filename);
     string line;
-    cout << "opened file in function" << endl;
     while( getline(file, line) ){
-        cout << "entered wile loop" << endl;
         string french;
         string english;
         string type;
@@ -167,10 +163,8 @@ void WordTable::addFromFile(string filename){
         getline(ss, french, ',');
         getline(ss, english, ',');
         getline(ss, type, ',');
-        cout << "stringstreamed..." << endl;
         
         addWord(french, english, type);
-        cout << "added word to hash table" << endl;
     }  
 }
 
