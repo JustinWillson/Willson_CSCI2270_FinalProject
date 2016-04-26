@@ -8,6 +8,10 @@ using namespace std;
      blankWord->french = "";
      blankWord->english = "";
      blankWord->type = "";
+     
+     for (int i = 0; i < 300; i++){
+         wordTable[i] = blankWord;
+     }
  }
  
 //Here we delete all the elements in the table as well as the
@@ -29,14 +33,70 @@ WordTable::~WordTable(){
 
 //the next three methods allow the user to practice different types of speech
 void WordTable::practiceNouns(){
-    
+    string input;
+    int score;
+    int count;
+    for(int i = 0; i< 100; i++){
+        if (wordTable[i]->french != ""){
+            word* temp = wordTable[i];
+            while(temp != NULL){
+                cout << "What is " << temp->french << " in English." << endl;
+                getline(cin, input);
+                if(input == temp->english){
+                    score++;
+                }
+                count++;
+                temp = temp->next;
+            }
+        } 
+    }
+
+    cout<< "On nouns, you got " << score << " correct out of " << count << endl;
 }
 
 void WordTable::practiceVerbs(){
+    string input;
+    int score;
+    int count;
+    for(int i = 100; i< 200; i++){
+        if (wordTable[i]->french != ""){
+            word* temp = wordTable[i];
+            while(temp != NULL){
+                cout << "What is " << temp->french << " in English." << endl;
+                getline(cin, input);
+                if(input == temp->english){
+                    score++;
+                }
+                count++;
+                temp = temp->next;
+            }
+        } 
+    }
+
+    cout<< "On verbs, you got " << score << " correct out of " << count << endl;
     
 }
 
 void WordTable::practiceAdjectives(){
+    string input;
+    int score;
+    int count;
+    for(int i = 200; i< 300; i++){
+        if (wordTable[i]->french != ""){
+            word* temp = wordTable[i];
+            while(temp != NULL){
+                cout << "What is " << temp->french << " in English." << endl;
+                getline(cin, input);
+                if(input == temp->english){
+                    score++;
+                }
+                count++;
+                temp = temp->next;
+            }
+        } 
+    }
+
+    cout<< "On adjectives, you got " << score << " correct out of " << count << endl;
     
 }
 
@@ -72,10 +132,14 @@ void WordTable::addWord(string french, string english, string type){
     thisWord->type = type;
     
     int index = getIndex(french, type);
-    
+    cout << "here is stuff at index ." << wordTable[index]->french << "." << wordTable[index]->english << "."  <<endl;
+    cout << "build word also here is index: " << index << endl;
     if(wordTable[index]->french == ""){
+        cout << "before insert" << endl;
         wordTable[index] = thisWord;
+        cout << "got through first if statement" << endl;
     } else {
+        cout << "entered other else?? " << endl;
         word* current = wordTable[index];
         while(current->next != NULL){
             current = current->next;
@@ -90,19 +154,23 @@ void WordTable::addWord(string french, string english, string type){
 //french,english,type
 void WordTable::addFromFile(string filename){
     ifstream file;
-    file.open(filename);
+    file.open (filename);
     string line;
+    cout << "opened file in function" << endl;
     while( getline(file, line) ){
+        cout << "entered wile loop" << endl;
         string french;
         string english;
         string type;
         
-        stringstream ss = stringstream(line);
+        stringstream ss(line);
         getline(ss, french, ',');
         getline(ss, english, ',');
         getline(ss, type, ',');
+        cout << "stringstreamed..." << endl;
         
         addWord(french, english, type);
+        cout << "added word to hash table" << endl;
     }  
 }
 
