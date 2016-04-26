@@ -14,7 +14,7 @@ struct word{
 
 class WordTable{
     private:
-        word* WordTable[300];
+        word* wordTable[300];
         word* blankWord;
     public:
         WordTable();
@@ -22,7 +22,7 @@ class WordTable{
         void practiceNouns();
         void practiceVerbs();
         void practiceAdjectives();
-        int getIndex(std::string wordFrench);
+        int getIndex(std::string wordFrench, std::string type);
         void addWord(std::string french, std::string english, std::string type);
         void addFromFile(std::string filename);
         void englishFromFrench(std::string french);

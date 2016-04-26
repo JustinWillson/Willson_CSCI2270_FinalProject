@@ -5,17 +5,17 @@ using namespace std;
  //We also hold the location of the original blank word to avoid memory leaks
  WordTable::WordTable(){
      blankWord = new word;
-     blankWord.french = "";
-     blankWord.english = "";
-     blankWord.type = "";
+     blankWord->french = "";
+     blankWord->english = "";
+     blankWord->type = "";
  }
  
 //Here we delete all the elements in the table as well as the
 //blank word we created when we initalized the class
 WordTable::~WordTable(){
     for(int i = 0; i < 300; i++){
-        if (WordTable[i]->french != ""){
-            word* temp = WordTable[i];
+        if ( wordTable[i]->french != "" ){
+            word* temp = wordTable[i];
             while(temp != NULL){
                 word* toDelete =  temp;
                 temp = temp->next;
@@ -67,16 +67,16 @@ int WordTable::getIndex(string wordFrench, string type){
 //adds a single word to the table, used by the addFromFile() method
 void WordTable::addWord(string french, string english, string type){
     word* thisWord = new word;
-    word->french = french;
-    word->english = english;
-    word->type = type;
+    thisWord->french = french;
+    thisWord->english = english;
+    thisWord->type = type;
     
     int index = getIndex(french, type);
     
-    if(WordTable[index]->french == ""){
-        WordTable[index] = thisWord;
+    if(wordTable[index]->french == ""){
+        wordTable[index] = thisWord;
     } else {
-        word* current = WordTable[index];
+        word* current = wordTable[index];
         while(current->next != NULL){
             current = current->next;
         }
@@ -97,7 +97,7 @@ void WordTable::addFromFile(string filename){
         string english;
         string type;
         
-        stringstream ss = strings(line);
+        stringstream ss = stringstream(line);
         getline(ss, french, ',');
         getline(ss, english, ',');
         getline(ss, type, ',');
@@ -109,20 +109,20 @@ void WordTable::addFromFile(string filename){
 void WordTable::englishFromFrench(string french){
     //while we don't know if the word is a noun or not, we start as a noun
     //so we can increment it by 100 until we find the word
-    int index = getIndex(french, "n")
+    int index = getIndex(french, "n");
     string english;
     bool found = false;
     
     //we increment index by 100 each pass through the loop until it points to an
     //index not in the hash table
     while(index < 300 && !found){
-        word* current = WordTable[index];
-        while(word* != NULL && !found){
+        word* current = wordTable[index];
+        while (current->next != NULL && !found) {
             if(current->french == french){
                 found = true;
-                english = current->english.
+                english = current->english;
             }
-            word = word->next;
+            current = current->next;
         }
         index+=100;
     }
@@ -138,10 +138,10 @@ void WordTable::englishFromFrench(string french){
 //mostly used for debugging
 void WordTable::printTable(){
     for(int i = 0; i < 300; i++){
-        if (WordTable[i]->french != ""){
-            word* temp = WordTable[i];
+        if (wordTable[i]->french != ""){
+            word* temp = wordTable[i];
             while(temp != NULL){
-                cout << "French: " << french << " ... English: " << english << endl;
+                cout << "French: " << temp->french << " ... English: " << temp->english << endl;
                 temp = temp->next;
             }
         }
