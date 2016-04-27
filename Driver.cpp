@@ -1,13 +1,16 @@
 #include <iostream>
 #include "WordTable.h"
 using namespace std;
+//Helper function to display menu
 void showMenu();
 
 int main(int argc, char* argv[]){
+    //initiate word table
     WordTable* myTable = new WordTable;
     myTable->addFromFile(argv[1]);
     string userInput = "0";
     
+    //main loop which shows menu and interprets the user's input
     while( userInput != "6" ){
         showMenu();
         cin >> userInput;
