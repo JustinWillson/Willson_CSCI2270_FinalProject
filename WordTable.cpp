@@ -109,7 +109,7 @@ void WordTable::practiceAdjectives(){
 //Verb: 1**
 //Adjective: 2**
 int WordTable::getIndex(string wordFrench, string type){
-    int sum;
+    int sum = 0;
     int typeNum;
     
     if(type == "n"){
@@ -123,8 +123,8 @@ int WordTable::getIndex(string wordFrench, string type){
     for (int i = 0; i<wordFrench.size(); i++){
         sum += wordFrench.at(i);
     }
-    
-    return sum%100 + 100*typeNum;
+    int toReturn = sum%100 + 100*typeNum;
+    return toReturn;
 }
 
 //adds a single word to the table, used by the addFromFile() method
@@ -179,7 +179,7 @@ void WordTable::englishFromFrench(string french){
     //index not in the hash table
     while(index < 300 && !found){
         word* current = wordTable[index];
-        while (current->next != NULL && !found) {
+        while (current != NULL && !found) {
             if(current->french == french){
                 found = true;
                 english = current->english;
@@ -203,7 +203,7 @@ void WordTable::printTable(){
         if (wordTable[i]->french != ""){
             word* temp = wordTable[i];
             while(temp != NULL){
-                cout << "French: " << temp->french << " ... English: " << temp->english << endl;
+                cout << "French: " << temp->french << " ... English: " << temp->english << "... index: " << i << endl;
                 temp = temp->next;
             }
         }

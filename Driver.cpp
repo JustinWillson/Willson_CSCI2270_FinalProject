@@ -6,7 +6,6 @@ void showMenu();
 int main(int argc, char* argv[]){
     WordTable* myTable = new WordTable;
     myTable->addFromFile(argv[1]);
-    cout << "added words" << endl;
     string userInput = "0";
     
     while( userInput != "6" ){
