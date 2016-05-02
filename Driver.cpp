@@ -24,9 +24,9 @@ int main(int argc, char* argv[]){
             
             myTable->englishFromFrench(word);
         } else if (userInput == "3") {
-            myTable->practiceVerbs();
-        } else if (userInput == "4") {
             myTable->practiceNouns();
+        } else if (userInput == "4") {
+            myTable->practiceVerbs();
         } else if (userInput == "5") {
             myTable->practiceAdjectives();
         } else if (userInput == "6"){
